@@ -59,18 +59,21 @@ export default function Upload() {
 
 		await kv.set(`resume: ${uuid}`, JSON.stringify(data));
 
-		setStatusText("Anaylzing...");
+		setStatusText("Analyzing...");
 
 		const feedback = await ai.feedback(uploadedFile.path, prepareInstructions({ jobTitle, jobDescription }));
 
-		if (!feedback) return setStatusText("Error: Failed to anaylze resume");
+		if (!feedback) return setStatusText("Error: Failed to analyze resume");
 
 		const feedbackText = typeof feedback.message.content === "string" ? feedback.message.content : feedback.message.content[0].text;
 
 		data.feedback = JSON.parse(feedbackText);
+
 		await kv.set(`resume: ${uuid}`, JSON.stringify(data));
 
-		setStatusText("Anaylysis complete, redirecting...");
+		setStatusText("Analysis complete, redirecting...");
+
+		navigate(`/resume/${uuid}`);
 	};
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -91,7 +94,7 @@ export default function Upload() {
 			<Navbar />
 
 			<section className="main-section">
-				<div className="page-heading py-16">
+				<div className="page-heading py-6">
 					<h1>Smart feedback for your dream job</h1>
 					{isProcessing ? (
 						<>
