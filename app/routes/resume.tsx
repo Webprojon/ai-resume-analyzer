@@ -7,6 +7,8 @@ import Details from "~/components/Details";
 
 export const meta = () => [{ title: "Resumind | Review " }, { name: "description", content: "Detailed overview of your resume" }];
 
+// 98b1d650-4524-4cdd-8ccd-57e30fbf52c7
+
 const Resume = () => {
 	const { auth, isLoading, fs, kv } = usePuterStore();
 	const { id } = useParams();

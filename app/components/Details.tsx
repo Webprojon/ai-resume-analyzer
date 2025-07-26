@@ -1,3 +1,3 @@
-export default function Details({ feedback }) {
+export default function Details({ feedback }: { feedback: Feedback }) {
 	return <div>Details</div>;
 }
